@@ -31,6 +31,20 @@ app.post("/api/products", async (req, res) => {
     }
 });
 
+app.delete("/api/products/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log("Deleting product with id: ", id);
+
+    try {
+        await Product.findByIdAndDelete(id);
+        console.log("Product deleted successfully");
+        res.status(200).json({ success: true, message: "Product deleted successfully" });
+    }catch (error) {
+        res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+});
+
 app.listen(PORT, () => {
     connectDB();
     console.log(`Server is running on port http://localhost:${PORT}`);
