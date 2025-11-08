@@ -6,6 +6,9 @@ import Product from './models/product.model.js';
 dotenv.config();
 
 const app = express();
+
+app.use(express.json()); // Middleware to parse JSON bodies
+
 const PORT = process.env.PORT || 5000;
 
 app.post("/api/products", async (req, res) => {
