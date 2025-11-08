@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.post("/products", async (req, res) => {
+app.post("/api/products", async (req, res) => {
     const product = req.body; //user will send product data in request body
 
     // Validate product data
