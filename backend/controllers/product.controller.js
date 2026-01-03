@@ -21,7 +21,7 @@ export const createProduct = async (req, res) => {
 }
 
 export const deleteProduct = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; // Get product ID from request parameters
     console.log("Deleting product with id: ", id);
 
     try {
@@ -45,8 +45,8 @@ export const getProducts = async (req, res) => {
 }
 
 export const updateProduct = async (req, res) => {
-    const { id } = req.params;
-    const updates = req.body;
+    const { id } = req.params; // Get product ID from request parameters
+    const updates = req.body; // Get updated product data from request body
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ success: false, message: "Product not found" });
