@@ -1,11 +1,11 @@
 import express from 'express';
-import Product from './models/product.model.js';
+import Product from '../models/product.model.js';
 import mongoose from 'mongoose';
 
 const router = express.Router();
 
 // Endpoint to create a new product
-router.post("/api/products", async (req, res) => {
+router.post("/", async (req, res) => {
     const product = req.body; //user will send product data in request body
 
     // Validate product data
@@ -26,7 +26,7 @@ router.post("/api/products", async (req, res) => {
 });
 
 // Endpoint to delete a product by ID
-router.delete("/api/products/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     console.log("Deleting product with id: ", id);
 
@@ -42,7 +42,7 @@ router.delete("/api/products/:id", async (req, res) => {
 });
 
 // Endpoint to get all products
-router.get("/api/products", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const products = await Product.find({});
         res.status(200).json({ success: true, data: products });
@@ -52,7 +52,8 @@ router.get("/api/products", async (req, res) => {
     }
 });
 
-router.put("/api/products/:id", async (req, res) => {
+// Endpoint to update a product by ID
+router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
 
