@@ -52,7 +52,7 @@ const Navbar = () => {
           fontSize={{ base: "22", sm: "28" }}
           fontWeight='bold'
           textTransform={"uppercase"}
-          textalign={"center"}
+          textAlign={"center"}
         >
           <Link to={"/"}> Product Store 🛒</Link>
         </Text>
@@ -70,7 +70,7 @@ const Navbar = () => {
           </Link>
           <Button onClick={toggleColorMode}> {/* Button to toggle color mode */}
             {colorMode === "light" ? <IoMoon /> : <LuSun />}
-            </Button>
+          </Button>
 
         </HStack>
       </Flex>

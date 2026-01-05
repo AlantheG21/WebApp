@@ -1,4 +1,4 @@
-import { Box, Container, Heading, VStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Container, Heading, VStack, useColorModeValue, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
 
 const CreatePage = () => {
@@ -78,6 +78,6 @@ const CreatePage = () => {
       </VStack>
     </Container>
   )
-}
+};
 
 export default CreatePage
