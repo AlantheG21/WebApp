@@ -53,5 +53,28 @@ export const useProductStore = create((set) => ({
             // On failure, return an error message and do not mutate local state
             return { success: false, message: data.message || "Failed to create product" };
         }
+    },
+    fetchProducts: async () => {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        if(res.ok) {
+            set({ products: data.data });
+        }
+    },
+    deleteProduct: async (pid) => {
+        const res = await fetch(`/api/products/${pid}`, {
+            method: "DELETE",
+        });
+        const data = await res.json();
+
+        if(!data.success) {
+            return { success: false, message: data.message };
+        }
+
+        // Update local store on success
+        set((state) => ({
+            products: state.products.filter((product) => product._id !== pid)
+        }));
+        return { success: true, message: data.message };
     }
 }));
