@@ -20,8 +20,12 @@ app.use("/api/products", productRoutes)
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/dist'))); // Serve static files from the React app
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html')); // Serve the main HTML file for any unknown routes
+    // Fallback: serve index.html for any non-API routes.
+    // Use a pathless handler to avoid path-to-regexp parsing issues caused by wildcard patterns.
+    app.use((req, res, next) => {
+        // Let API routes pass through
+        if (req.path.startsWith('/api')) return next();
+        res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
     });
 }
 
