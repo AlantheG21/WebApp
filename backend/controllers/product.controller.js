@@ -53,12 +53,14 @@ export const updateProduct = async (req, res) => {
     const { id } = req.params; // Get product ID from request parameters
     const updates = req.body; // Get updated product data from request body
 
+    console.log("Received updates for product", id, updates);
+
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ success: false, message: "Product not found" });
     }
 
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(id, updates)
+        const updatedProduct = await Product.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
         res.status(200).json({ success: true, data: updatedProduct });
     }catch (error) {
         res.status(500).json({ success: false, message: "Server Error" });
